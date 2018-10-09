@@ -4,6 +4,9 @@
     font-size: 30px;
 }
 
+.checkboxes {
+    display: flex;
+}
 .dropdown_content {
     display: none;
     flex-direction: column;
@@ -28,7 +31,7 @@
 
 .links {
     display:flex;
-    border:solid;
+    
     font-style: italic;
     align-items: center;
     height: 80px;
@@ -65,9 +68,20 @@
     
 }
 
+
+.read_more {
+    position: relative;
+    right: 37%;
+}
+
+.copyright {
+    height:20px;
+}
+
 .top_side {
     background-color: lightblue;
     width: 90%;
+    border:solid;
 }
 
 .bottom_side {
@@ -76,10 +90,11 @@
     width: 90%;
     height: 80px;
     background-color: lightblue;
+    justify-content: center;
+    align-items: center;
 }
 
-.txt {
-    width:60%;
-    padding-right: 30%;
-    display: inline-block;
+.text {
+    display:flex;
+    flex-direction: row;
 }
