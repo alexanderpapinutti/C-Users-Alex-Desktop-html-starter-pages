@@ -6,6 +6,7 @@
 
 .checkboxes {
     display: flex;
+    width:100%;
 }
 .dropdown_content {
     display: none;
