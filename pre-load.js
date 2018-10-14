@@ -32,11 +32,11 @@ function myFunction(members) {
     header_row.appendChild(header_column_votes);
     thead.appendChild(header_row);
     table.appendChild(thead);
-    
+
     for (var i = 0; i < members.length; i++) {
 
         var tr = document.createElement("tr");
-        
+
         var td = document.createElement("td");
         var firstName = members[i].first_name;
         var tfirstName = document.createTextNode(firstName + " ");
@@ -58,9 +58,6 @@ function myFunction(members) {
         var party = members[i].party;
         var tparty = document.createTextNode(party);
         column_party.appendChild(tparty);
-
-        tr.classList.add(party)
-
         var column_state = document.createElement("td");
         var state = members[i].state;
         var tstate = document.createTextNode(state + " ")
@@ -90,33 +87,37 @@ function myFunction(members) {
 function filterTableByParty() {
     var allRows;
     allRows = data.results["0"].members;
-    var newArray = []
+    var partyArray = []
 
     for (var i = 0; i < allRows.length; i++) {
         if (allRows[i].party == "R" && checkBoxRepublican.checked) {
-            newArray.push(allRows[i]);
+            partyArray.push(allRows[i]);
         } else if (allRows[i].party == "D" && checkBoxDemocrat.checked) {
-            newArray.push(allRows[i]);
+            partyArray.push(allRows[i]);
         } else if (allRows[i].party == "I" && checkBoxIndependent.checked) {
-            newArray.push(allRows[i]);
+            partyArray.push(allRows[i]);
         }
     }
-    return newArray;
+    
+    
+    
+    return partyArray;
 }
 
 
+//function filterTable() {
+//    var list = document.getElementById("state-filter");
+//    var states = filterStates();
+//
+//    var myArray = [];
+//    for (var i = 0; i < states.length; i++) {
+//        if (list.value == states[i]) {
+//            myArray.push(states[i])
+//        }
+//    }
+//    return myArray;
+//}
 
-function filterTable(){
-    var list = document.getElementById("state-filter");
-    
-    var states=filterStates();
-    
-    for (var i=0; i<states.length; i++){
-//        if (states[i]==)
-    }
-    
-    
-}
 
 
 myFunction(data.results["0"].members);
@@ -133,37 +134,51 @@ checkBoxRepublican.addEventListener("click", function () {
     myFunction(filterTableByParty());
 });
 
-        
 
-function filterStates(){
+
+function filterStates() {
     var allRows = data.results["0"].members;
-    var myArray=[];
-    for (var i=0; i<allRows.length; i++){
+    var myArray = [];
+    for (var i = 0; i < allRows.length; i++) {
         myArray.push(allRows[i].state);
-        var states = myArray.filter((element, index)=>(myArray.indexOf(element)==index));
-        
+        var states = myArray.filter((element, index) => (myArray.indexOf(element) == index));
+
     }
     return states.sort();
-   
+
 }
 
-myNewFunction();
 
-function myNewFunction(){
+function updateStateDropdown () {
     var myArray = filterStates();
-    
-    var select= document.getElementById("state-filter");
-    for( var i=0; i<myArray.length; i++){
+    var newArray=[];
+    var select = document.getElementById("state-filter");
+    for (var i = 0; i < myArray.length; i++) {
         var option = document.createElement("option");
         var txt = document.createTextNode(myArray[i]);
         option.appendChild(txt);
         select.appendChild(option);
     }
+}
+
+updateStateDropdown();
+
+function selectedState(){
+    var allRows;
+    allRows = data.results["0"].members;
+    var stateSelected = document.getElementById("state-filter").value;
+    var statesArray = [];
+    for (var i=0; i<allRows.length; i++){
+        
+        if(allRows[i].state == stateSelected){
+            statesArray.push(allRows[i]);
+            
+        }
     
+    }
+    return statesArray;
 }
 
 dropDownStates.addEventListener("change", function () {
-    myNewFunction(filterTable());
+    myFunction(selectedState());
 });
-
-

@@ -30,12 +30,22 @@
     display: flex;
 }
 
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 .links {
     display:flex;
     
     font-style: italic;
     align-items: center;
     height: 80px;
+}
+
+.table {
+    border: solid black;
+    width: 90%;
 }
 
 .logo_e-mail {
